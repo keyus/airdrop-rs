@@ -1,10 +1,13 @@
+import { use } from 'react'
 import { NavLink, Outlet, useMatches } from 'react-router'
 import { Avatar, App as AntdApp, Button, Modal, message } from 'antd'
 import { GlobalOutlined, OneToOneOutlined, CloudServerOutlined } from '@ant-design/icons'
+import { ConfigContext } from '@/rootContext'
 import LogoSvg from './assets/logo.svg?react'
 import "./App.css";
 
 function App() {
+  const { refreshConfig } = use(ConfigContext);
   const useapp = AntdApp.useApp();
   window.message = useapp.message;
   const matches = useMatches();
@@ -20,6 +23,7 @@ function App() {
       onOk() {
         window.invoke('clear')
         message.success('清除缓存成功');
+        refreshConfig();
       },
     })
 
