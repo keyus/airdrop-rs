@@ -1,4 +1,5 @@
 use fs_extra::dir::{CopyOptions, copy, remove};
+use std::fs;
 use serde_json;
 use tauri::{AppHandle, Manager, Result};
 use serde;
@@ -22,6 +23,9 @@ impl Util {
         let app_data_dir = path.app_data_dir()?;
         let resource_dir = path.resource_dir()?.join(crate::CONFIG_DIR);
         let app_resource = path.app_data_dir()?.join(crate::CONFIG_DIR);
+        if !app_data_dir.exists(){
+            fs::create_dir_all(&app_data_dir)?;
+        }
         if app_resource.exists() == false {
             copy(&resource_dir, &app_data_dir, &CopyOptions::new())
                 .map_err(|e| tauri::Error::AssetNotFound(e.to_string()))?;
