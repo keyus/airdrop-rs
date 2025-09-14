@@ -1,6 +1,6 @@
 {
     "chrome_install_dir": "C:\\Program Files\\Google\\Chrome\\Application\\",
-    "chrome_user_data_dir": "d:\\chrome100 app",
+    "chrome_user_data_dir": "d:\\chrome100",
     "telegram_install_dir": "D:\\telegram100-app",
     "use_url": true,
     "url": ["https://www.google.com"],
