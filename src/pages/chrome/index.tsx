@@ -29,11 +29,21 @@ export default function Chrome() {
     })
     const total = data.length;
 
+    useMount(() => {
+        initWalllet()
+    })
+
     useUpdateEffect(() => {
-        const wallet = genWalletList(config.wallet)
-        originData = wallet;
-        setData(wallet)
+        initWalllet()
     }, [config.wallet])
+
+    const initWalllet = () => {
+        if (config.wallet) {
+            const wallet = genWalletList(config.wallet)
+            originData = wallet;
+            setData(wallet)
+        }
+    }
 
 
     // 每3秒检查一次进程是否存在
