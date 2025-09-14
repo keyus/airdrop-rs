@@ -4,19 +4,17 @@ import { ConfigContext } from '@/rootContext'
 import './style.css'
 export default function Setting() {
     const [form] = Form.useForm();
-    const { config } = useContext(ConfigContext);
+    const { config, updateConfig } = useContext(ConfigContext);
 
     const onFinish = (values: AppConfig) => {
         Modal.confirm({
             title: '提示',
             content: '确定保存配置吗？',
             onOk: async () => {
-                await window.invoke('set_config', {
-                    data: {
-                        ...config,
-                        ...values
-                    }
-                });
+                await updateConfig({
+                    ...config,
+                    ...values
+                })
                 window.message.success('保存成功')
             }
         })
